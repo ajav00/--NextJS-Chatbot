@@ -2,7 +2,19 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Project } from "./models";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 // import robot from "./../public/robot.png";
+
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import Link from "next/link";
+import { ChevronLeftIcon, ChevronRightIcon } from "@primer/octicons-react";
 
 export default function Home() {
 	const [index, setIndex] = useState(0);
@@ -11,10 +23,39 @@ export default function Home() {
 		"/assets/robot-v1.png",
 		"/assets/robot-ok-v1.png",
 		"/assets/robot-up-v1.png",
-		//"/assets/robot-hello-v1.png",
 	];
 
 	const projects: Project[] = [
+		{
+			title: 'Darth Vader Chat Bot',
+			description: 'Darth Vader try to find information about the music that you likes',
+			image: '/assets/lord-vader-music.png',
+			link: '/vader'
+		},
+		{
+			title: 'Darth Vader Chat Bot',
+			description: 'Darth Vader try to find information about the music that you likes',
+			image: '/assets/vader-complete.png',
+			link: '/vader'
+		},
+		{
+			title: 'Darth Vader Chat Bot',
+			description: 'Darth Vader try to find information about the music that you likes',
+			image: '/assets/lord-vader-music.png',
+			link: '/vader'
+		},
+		{
+			title: 'Darth Vader Chat Bot',
+			description: 'Darth Vader try to find information about the music that you likes',
+			image: '/assets/vader-complete.png',
+			link: '/vader'
+		},
+		{
+			title: 'Darth Vader Chat Bot',
+			description: 'Darth Vader try to find information about the music that you likes',
+			image: '/assets/lord-vader-music.png',
+			link: '/vader'
+		},
 		{
 			title: 'Darth Vader Chat Bot',
 			description: 'Darth Vader try to find information about the music that you likes',
@@ -94,16 +135,44 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div  className="container-slider">
+			<div  className="container-slider mb-10">
+				<h2 className="place-self-center text-3xl font-bold my-7">List of Projects</h2>
+				<Swiper
+					effect={"coverflow"}
+					grabCursor={true}
+					centeredSlides={true}
+					slidesPerView={"auto"}
+					//loop={true}
+					coverflowEffect={{
+						rotate: 0,
+						stretch: 0,
+						depth: 100,
+						modifier: 2.5
+					}}
+					className="swiper"
+				>
 				{
 					projects.map((project, idx) => {
 						
 						return (
-							<>
-							</>
+							<SwiperSlide key={idx}>
+								<Link href={ project.link } >
+									<img src={project.image} alt={project.title} />
+								</Link>
+							</SwiperSlide>
+
 						)
 					})
 				}
+				{/* <div className="slider-controler">
+					<div className="swipper-button-prev slider-arrow">
+						<ChevronLeftIcon size={12}  />
+					</div>
+					<div className="swipper-button-next slider-arrow">
+						<ChevronRightIcon size={12} />
+					</div>
+				</div> */}
+				</Swiper>
 			</div>
 		</>
 	);
